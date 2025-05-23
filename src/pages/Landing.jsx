@@ -34,6 +34,7 @@ function Landing() {
                     backgroundSize: 'cover',
                     backgroundPosition: 'center',
                     backgroundRepeat: 'no-repeat',
+                    backgroundAttachment: 'fixed',
                     minHeight: '70vh',
                     position: 'relative',
                 }}
