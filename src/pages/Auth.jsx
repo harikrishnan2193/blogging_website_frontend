@@ -49,7 +49,7 @@ function Auth() {
 
     //login function
     const handleLogin = async (e) => {
-        e.preventDefault();
+        e.preventDefault()
         const { email, password } = userData
         if (!email || !password) {
             Swal.fire("Please fill the form completily")
