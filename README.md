@@ -31,4 +31,4 @@ Built with a modern tech stack, this blogging site features an intuitive interfa
 
 ### 🚀 Live Demo
 
-[Click here to try the live app](https://blogging-website-frontend-omega.vercel.app/)
+[Click here to try the live app](https://blogging-website-frontend-three.vercel.app/)
