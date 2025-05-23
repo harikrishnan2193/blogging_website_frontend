@@ -23,7 +23,7 @@ Built with a modern tech stack, this blogging site features an intuitive interfa
 
 ### 🔗 Backend Repository
 
-👉 [Backend GitHub Repo]()
+👉 [Backend GitHub Repo](https://github.com/harikrishnan2193/blogging_website_backend)
 
 ### 🖼️ Screenshot
 
