@@ -1,0 +1,77 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+.content-padding {
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+@media (min-width: 576px) {
+  .content-padding {
+    padding-left: 3rem;
+    padding-right: 3rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .content-padding {
+    padding-left: 5rem;
+    padding-right: 5rem;
+  }
+}
+
+@media (min-width: 992px) {
+  .content-padding {
+    padding-left: 8rem;
+    padding-right: 8rem;
+  }
+}
+
+@media (min-width: 1200px) {
+  .content-padding {
+    padding-left: 12rem;
+    padding-right: 12rem;
+  }
+}
+
+/* Landing page */
+.text-heading,
+.blog-text {
+  font-family: "Raleway", sans-serif;
+}
+
+.card-content:hover {
+  cursor: pointer;
+}
+
+/* admin page */
+.custom-tag-button {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  font-size: 1rem;
+  color: inherit;
+  font-family: inherit;
+  cursor: pointer;
+  text-decoration: none;
+  background-image: linear-gradient(currentColor, currentColor);
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  background-size: 0% 2px;
+  transition: background-size 0.3s ease-in-out;
+}
+
+.custom-tag-button:hover {
+  background-size: 100% 2px;
+}
+.card-heading{
+  font-family: "Roboto Mono", monospace;
+}
+.blog-content-text{
+  font-family: "Tuffy", sans-serif;
+}
