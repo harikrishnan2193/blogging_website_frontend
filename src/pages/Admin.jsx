@@ -197,6 +197,7 @@ function Admin() {
             userName: ''
         })
         setImgPreview('')
+        setEditMode(false)
         setShowModal(false)
     }
 
@@ -316,16 +317,12 @@ function Admin() {
                                 </div>
 
                                 <div className="modal-footer">
-                                    <div className="modal-footer">
-                                        <button type="button" className="btn btn-secondary" onClick={handleClose}>Close</button>
-
-                                        {!editMode ? (
-                                            <button onClick={handlePublish} type="button" className="btn btn-primary">Publish</button>
-                                        ) : (
-                                            <button onClick={handleUpdate} type="button" className="btn btn-success">Update</button>
-                                        )}
-                                    </div>
-
+                                    <button type="button" className="btn btn-secondary" onClick={handleClose}>Close</button>
+                                    {!editMode ? (
+                                        <button onClick={handlePublish} type="button" className="btn btn-primary">Publish</button>
+                                    ) : (
+                                        <button onClick={handleUpdate} type="button" className="btn btn-success">Update</button>
+                                    )}
                                 </div>
                             </div>
                         </div>
