@@ -20,7 +20,7 @@ function Heade() {
 
   //logout function
   const handleLogout = () => {
-    sessionStorage.clear();
+    sessionStorage.clear()
     dispatch(logout())
     navigate('/')
     Swal.fire('Logout successful')

@@ -48,10 +48,6 @@
   font-family: "Raleway", sans-serif;
 }
 
-.card-content:hover {
-  cursor: pointer;
-}
-
 /* admin page */
 .custom-tag-button {
   background: none;

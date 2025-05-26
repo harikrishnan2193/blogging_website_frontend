@@ -1,9 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import { getAllblogsAPI } from '../services/allApi';
 import { BASE_URL } from '../services/baseUrl';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { setSelectedBlog } from '../redux/blogSlice';
 
 function Landing() {
 
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
     const [allBlogs, setAllBlogs] = useState([])
 
     //get all blogs
@@ -11,7 +16,6 @@ function Landing() {
         try {
             const response = await getAllblogsAPI();
             if (response.status === 200) {
-                console.log("Fetched blogs:", response.data);
                 setAllBlogs(response.data);
             } else {
                 console.error("Failed to fetch orders");
@@ -35,6 +39,12 @@ function Landing() {
         if (diffInMinutes < 60) return `${diffInMinutes} minute${diffInMinutes !== 1 ? 's' : ''} ago`
         if (diffInHours < 24) return `${diffInHours} hour${diffInHours !== 1 ? 's' : ''} ago`
         return `${diffInDays} day${diffInDays !== 1 ? 's' : ''} ago`
+    }
+
+    //read a blog
+    const handleReadBlog = (blog) => {
+        dispatch(setSelectedBlog(blog))
+        navigate('/read/blogs')
     }
 
     useEffect(() => {
@@ -68,7 +78,7 @@ function Landing() {
 
             {allBlogs.length > 0 ? (
                 [...allBlogs].reverse().map((blog, index) => (
-                    <div key={index} className="card-content content-padding py-5">
+                    <div key={index} className="card-content content-padding py-5" onClick={() => handleReadBlog(blog)} style={{ cursor: 'pointer' }}>
                         <div className="row shadow-sm border overflow-hidden">
                             {/* left */}
                             <div className="col-md-6 p-0">
@@ -101,8 +111,7 @@ function Landing() {
                                     <h5 className="blog-text fw-bold">{blog.title}</h5>
                                     <h6>{blog.subHead}</h6>
                                     <p className="text-muted">
-                                        {blog.content}
-                                        {/* {blog.content.slice(0, 150)}... */}
+                                        {blog.content.slice(0, 150)}...
                                     </p>
                                 </div>
 

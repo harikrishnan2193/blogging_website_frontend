@@ -21,7 +21,6 @@ function Admin() {
         blogImage: '',
         userName: ''
     })
-    console.log(product);
 
     useEffect(() => {
         if (sessionStorage.getItem("token")) {

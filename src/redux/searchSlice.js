@@ -11,7 +11,7 @@ const searchSlice = createSlice({
       state.term = action.payload;
     },
   },
-});
+})
 
 export const { setSearchTerm } = searchSlice.actions;
 export default searchSlice.reducer;
