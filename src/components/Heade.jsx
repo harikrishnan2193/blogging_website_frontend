@@ -37,9 +37,9 @@ function Heade() {
     <div className="header-content">
       <Navbar expand="lg" bg="light" className="py-3">
         <Container fluid className="content-padding">
-          <Navbar.Brand href="/" className="d-flex align-items-center gap-2">
-            <i className="fa-solid fa-blog fs-3 text-dark"></i>
-          </Navbar.Brand>
+          <div className="d-flex align-items-center pe-2">
+            <i className="fa-solid fa-blog fs-2 text-dark"></i>
+          </div>
 
           <Navbar.Toggle aria-controls="navbarScroll" />
 

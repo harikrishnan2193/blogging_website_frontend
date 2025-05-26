@@ -8,6 +8,7 @@ function Admin() {
 
     const [editMode, setEditMode] = useState(false)
     const [editingBlogId, setEditingBlogId] = useState(null)
+    const searchTerm = useSelector((state) => state.search.searchTerm.toLowerCase())
 
     const isLoggedInRedux = useSelector((state) => state.auth.loggedIn)
     const [allUserBlog, setAllUserBlog] = useState([])
@@ -101,6 +102,13 @@ function Admin() {
             console.warn("No user details found. Cannot fetch blogs.")
         }
     }
+
+    //filter user blogs for serch
+    const filteredBlogs = allUserBlog?.filter(blog =>
+        blog.title.toLowerCase().includes(searchTerm) ||
+        blog.subHead.toLowerCase().includes(searchTerm) ||
+        blog.content.toLowerCase().includes(searchTerm)
+    )
 
     //edit blog
     const handleEdit = (blog) => {
@@ -220,8 +228,8 @@ function Admin() {
 
 
                 {/* card */}
-                {allUserBlog.length > 0 ? (
-                    [...allUserBlog].reverse().map((blog, index) => (
+                {filteredBlogs.length > 0 ? (
+                    [...filteredBlogs].reverse().map((blog, index) => (
                         <div className="border p-5 mb-5 shadow-sm">
                             {/* admin info */}
                             <div className="d-flex align-items-center justify-content-between mb-3">
@@ -243,14 +251,11 @@ function Admin() {
                                     <i className="fa-solid fa-trash" onClick={() => handleDelete(blog._id)}></i>
                                 </div>
                             </div>
-
-                            {/* heading */}
+                            {/* blog detil*/}
                             <h3 className="card-heading fw-bold">{blog.title}</h3>
-
                             <p className="fs-5 text-dark">
                                 {blog.subHead}
                             </p>
-
                             <img
                                 src={`${BASE_URL}/uploads/${blog.blogImage}`}
                                 alt="No image"
@@ -259,6 +264,7 @@ function Admin() {
                             <p className="blog-content-text fs-7 text-dark py-4">
                                 {blog.content}
                             </p>
+
                         </div>
                     ))
                 )

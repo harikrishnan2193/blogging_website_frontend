@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { getAllblogsAPI } from '../services/allApi';
 import { BASE_URL } from '../services/baseUrl';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { setSelectedBlog } from '../redux/blogSlice';
 
@@ -10,6 +10,8 @@ function Landing() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const [allBlogs, setAllBlogs] = useState([])
+    const searchTerm = useSelector((state) => state.search.searchTerm.toLowerCase())
+
 
     //get all blogs
     const getAllBlogs = async () => {
@@ -24,6 +26,14 @@ function Landing() {
             console.error("Error fetching orders:", error);
         }
     }
+
+    //filter blogs for serch
+    const filteredBlogs = allBlogs?.filter(blog =>
+        blog.title.toLowerCase().includes(searchTerm) ||
+        blog.subHead.toLowerCase().includes(searchTerm) ||
+        blog.content.toLowerCase().includes(searchTerm)
+    )
+
 
     //time difference
     function getTimeAgo(dateString) {
@@ -76,8 +86,8 @@ function Landing() {
                 <h2>All Blogs</h2>
             </div>
 
-            {allBlogs.length > 0 ? (
-                [...allBlogs].reverse().map((blog, index) => (
+            {filteredBlogs.length > 0 ? (
+                [...filteredBlogs].reverse().map((blog, index) => (
                     <div key={index} className="content-padding py-5">
                         <div className='hover-scale-wrapper transition duration-300' onClick={() => handleReadBlog(blog)}>
                             <div className="row shadow-sm border overflow-hidden">
@@ -90,10 +100,10 @@ function Landing() {
                                         style={{ objectFit: 'cover', height: '100%' }}
                                     />
                                 </div>
-    
+
                                 {/* right */}
                                 <div className="col-md-6 p-5 d-flex flex-column justify-content-between">
-    
+
                                     <div className="d-flex align-items-center mb-4">
                                         <img
                                             src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png"
@@ -107,7 +117,7 @@ function Landing() {
                                             <small className="text-muted">{new Date(blog.updatedAt).toLocaleString()}</small>
                                         </div>
                                     </div>
-    
+
                                     <div className="flex-grow-1 d-flex flex-column justify-content-center ">
                                         <h5 className="blog-text fw-bold">{blog.title}</h5>
                                         <h6>{blog.subHead}</h6>
@@ -115,12 +125,12 @@ function Landing() {
                                             {blog.content.slice(0, 150)}...
                                         </p>
                                     </div>
-    
+
                                     <div className="pt-3 border-top text-end">
                                         <small className="text-muted">{getTimeAgo(blog.updatedAt)}</small>
                                     </div>
                                 </div>
-    
+
                             </div>
                         </div>
                     </div>
