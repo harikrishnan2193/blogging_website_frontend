@@ -25,6 +25,7 @@ function Admin() {
     useEffect(() => {
         if (sessionStorage.getItem("token")) {
             setToken(sessionStorage.getItem("token"))
+
         }
         const userDetails = sessionStorage.getItem("userDetils");
         if (userDetails) {
@@ -32,7 +33,7 @@ function Admin() {
             setProduct(prev => ({
                 ...prev,
                 userName: parsedDetails.name
-            }));
+            }))
         }
     }, [])
 
@@ -84,12 +85,11 @@ function Admin() {
         if (userDetailsString) {
             const userDetails = JSON.parse(userDetailsString)
             const userId = userDetails._id
-            console.log(userId)
+            // console.log(userId)
 
             try {
                 const response = await getUsersBlogAPI(userId)
                 if (response.status === 200) {
-                    console.log("Fetched Blogs:", response.data)
                     setAllUserBlog(response.data)
                 } else {
                     console.error("Failed to fetch blogs")
