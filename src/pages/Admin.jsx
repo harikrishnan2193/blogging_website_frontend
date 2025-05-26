@@ -6,8 +6,8 @@ import { BASE_URL } from '../services/baseUrl'
 
 function Admin() {
 
-    const [editMode, setEditMode] = useState(false);
-    const [editingBlogId, setEditingBlogId] = useState(null);
+    const [editMode, setEditMode] = useState(false)
+    const [editingBlogId, setEditingBlogId] = useState(null)
 
     const isLoggedInRedux = useSelector((state) => state.auth.loggedIn)
     const [allUserBlog, setAllUserBlog] = useState([])
@@ -46,60 +46,60 @@ function Admin() {
 
     //function to add bloggs
     const handlePublish = async (e) => {
-        e.preventDefault();
-        if (!token) return Swal.fire('Not authorized');
+        e.preventDefault()
+        if (!token) return Swal.fire('Not authorized')
 
-        const { title, subHead, content, blogImage, userName } = product;
+        const { title, subHead, content, blogImage, userName } = product
         if (!title || !subHead || !content || !blogImage) {
-            return Swal.fire('Please fill all fields');
+            return Swal.fire('Please fill all fields')
         }
 
-        const reqBody = new FormData();
-        reqBody.append('title', title);
-        reqBody.append('subHead', subHead);
-        reqBody.append('content', content);
-        reqBody.append('blogImage', blogImage);
-        reqBody.append('userName', userName);
+        const reqBody = new FormData()
+        reqBody.append('title', title)
+        reqBody.append('subHead', subHead)
+        reqBody.append('content', content)
+        reqBody.append('blogImage', blogImage)
+        reqBody.append('userName', userName)
 
         const reqHeader = {
             "Content-Type": "multipart/form-data",
             "Authorization": `Bearer ${token}`
         };
 
-        const result = await addBlogAPI(reqBody, reqHeader);
+        const result = await addBlogAPI(reqBody, reqHeader)
         if (result.status === 200) {
-            Swal.fire('Blog posted successfully');
-            setShowModal(false);
-            setProduct({ title: "", subHead: "", content: "", blogImage: "" });
+            Swal.fire('Blog posted successfully')
+            setShowModal(false)
+            setProduct({ title: "", subHead: "", content: "", blogImage: "" })
             setImgPreview("")
             getAllUserBlogs()
         } else {
-            Swal.fire(result.response?.data?.message || 'Failed');
+            Swal.fire(result.response?.data?.message || 'Failed')
         }
     }
 
     //function to get all users blogs
     const getAllUserBlogs = async () => {
-        const userDetailsString = sessionStorage.getItem("userDetils");
+        const userDetailsString = sessionStorage.getItem("userDetils")
 
         if (userDetailsString) {
             const userDetails = JSON.parse(userDetailsString)
-            const userId = userDetails._id;
-            console.log(userId);
+            const userId = userDetails._id
+            console.log(userId)
 
             try {
-                const response = await getUsersBlogAPI(userId);
+                const response = await getUsersBlogAPI(userId)
                 if (response.status === 200) {
-                    console.log("Fetched Blogs:", response.data);
-                    setAllUserBlog(response.data);
+                    console.log("Fetched Blogs:", response.data)
+                    setAllUserBlog(response.data)
                 } else {
-                    console.error("Failed to fetch blogs");
+                    console.error("Failed to fetch blogs")
                 }
             } catch (error) {
-                console.error("Error fetching blogs:", error);
+                console.error("Error fetching blogs:", error)
             }
         } else {
-            console.warn("No user details found. Cannot fetch blogs.");
+            console.warn("No user details found. Cannot fetch blogs.")
         }
     }
 
@@ -112,20 +112,20 @@ function Admin() {
             blogImage: "",
             userName: blog.userName
         });
-        setImgPreview(`${BASE_URL}/uploads/${blog.blogImage}`);
-        setEditMode(true);
-        setEditingBlogId(blog._id);
-        setShowModal(true);
+        setImgPreview(`${BASE_URL}/uploads/${blog.blogImage}`)
+        setEditMode(true)
+        setEditingBlogId(blog._id)
+        setShowModal(true)
     }
 
     //update blogs
     const handleUpdate = async (e) => {
-        e.preventDefault();
+        e.preventDefault()
         if (!token || !editingBlogId) return Swal.fire('Not authorized')
 
         const { title, subHead, content, blogImage, userName } = product
         if (!title || !subHead || !content) {
-            return Swal.fire('Please fill all fields');
+            return Swal.fire('Please fill all fields')
         }
 
         const reqBody = new FormData()
@@ -156,13 +156,23 @@ function Admin() {
 
     //delete a blog
     const handleDelete = async (id) => {
-        const confirmed = window.confirm('Are you sure you want to delete this blog?')
-        if (!confirmed) return
+        const result = await Swal.fire({
+            title: 'Are you sure?',
+            text: 'Do you really want to delete this blog?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Yes, delete it!',
+            cancelButtonText: 'Cancel'
+        })
+
+        if (!result.isConfirmed) return
 
         try {
             const reqHeader = {
                 "Authorization": `Bearer ${token}`
-            };
+            }
 
             const response = await deleteBlogAPI(id, reqHeader)
 
@@ -211,7 +221,7 @@ function Admin() {
 
                 {/* card */}
                 {allUserBlog.length > 0 ? (
-                    allUserBlog.map((blog, index) => (
+                    [...allUserBlog].reverse().map((blog, index) => (
                         <div className="border p-5 mb-5 shadow-sm">
                             {/* admin info */}
                             <div className="d-flex align-items-center justify-content-between mb-3">
