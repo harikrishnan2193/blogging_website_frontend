@@ -67,8 +67,8 @@ function Landing() {
             </div>
 
             {allBlogs.length > 0 ? (
-                allBlogs.map((blog, index) => (
-                    <div className="card-content content-padding py-5">
+                [...allBlogs].reverse().map((blog, index) => (
+                    <div key={index} className="card-content content-padding py-5">
                         <div className="row shadow-sm border overflow-hidden">
                             {/* left */}
                             <div className="col-md-6 p-0">
@@ -82,47 +82,41 @@ function Landing() {
 
                             {/* right */}
                             <div className="col-md-6 p-5 d-flex flex-column justify-content-between">
-                                <div className='pb-4'>
-                                    <div className="d-flex align-items-center">
-                                        <img
-                                            src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png"
-                                            className="rounded-circle me-2"
-                                            alt="Admin"
-                                            width="40"
-                                            height="40"
-                                        />
-                                        <div>
-                                            <small className="text-muted">{blog.userName}</small><br />
-                                            <small className="text-muted">{new Date(blog.updatedAt).toLocaleString()}</small>
-                                        </div>
+
+                                <div className="d-flex align-items-center mb-4">
+                                    <img
+                                        src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png"
+                                        className="rounded-circle me-2"
+                                        alt="Admin"
+                                        width="40"
+                                        height="40"
+                                    />
+                                    <div>
+                                        <small className="text-muted">{blog.userName}</small><br />
+                                        <small className="text-muted">{new Date(blog.updatedAt).toLocaleString()}</small>
                                     </div>
-
-                                    <h5 className="blog-text fw-bold">{blog.title}</h5>
-                                    <p className="text-muted">
-                                        {blog.subHead.length > 200
-                                            ? <>
-                                                {blog.subHead.slice(0, 200)}...
-                                                <span style={{ color: 'blue', cursor: 'pointer' }}> Read more</span>
-                                            </>
-                                            : blog.subHead}
-                                    </p>
-
                                 </div>
 
-                                <div className="d-flex justify-content-end pt-3 border-top">
-                                    <div>
-                                        <small className="text-muted">{getTimeAgo(blog.updatedAt)}</small>
-                                    </div>
+                                <div className="flex-grow-1 d-flex flex-column justify-content-center ">
+                                    <h5 className="blog-text fw-bold">{blog.title}</h5>
+                                    <h6>{blog.subHead}</h6>
+                                    <p className="text-muted">
+                                        {blog.content}
+                                        {/* {blog.content.slice(0, 150)}... */}
+                                    </p>
+                                </div>
+
+                                <div className="pt-3 border-top text-end">
+                                    <small className="text-muted">{getTimeAgo(blog.updatedAt)}</small>
                                 </div>
                             </div>
+
                         </div>
                     </div>
                 ))
             ) : (
                 <p className='fw-bold content-padding py-3'>Blogs are loading...</p>
-            )
-
-            }
+            )}
 
         </>
 

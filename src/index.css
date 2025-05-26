@@ -39,10 +39,13 @@
 }
 
 /* Landing page */
-.text-heading,
+.text-heading {
+  font-family: "Raleway", sans-serif;
+  padding-top: 4rem;
+}
+
 .blog-text {
   font-family: "Raleway", sans-serif;
-  padding-top: 5rem;
 }
 
 .card-content:hover {
