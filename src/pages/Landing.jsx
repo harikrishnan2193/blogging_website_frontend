@@ -78,48 +78,50 @@ function Landing() {
 
             {allBlogs.length > 0 ? (
                 [...allBlogs].reverse().map((blog, index) => (
-                    <div key={index} className="card-content content-padding py-5" onClick={() => handleReadBlog(blog)} style={{ cursor: 'pointer' }}>
-                        <div className="row shadow-sm border overflow-hidden">
-                            {/* left */}
-                            <div className="col-md-6 p-0">
-                                <img
-                                    src={`${BASE_URL}/uploads/${blog.blogImage}`}
-                                    alt="No image"
-                                    className="img-fluid w-100 h-100 object-fit-cover"
-                                    style={{ objectFit: 'cover', height: '100%' }}
-                                />
-                            </div>
-
-                            {/* right */}
-                            <div className="col-md-6 p-5 d-flex flex-column justify-content-between">
-
-                                <div className="d-flex align-items-center mb-4">
+                    <div key={index} className="content-padding py-5">
+                        <div className='hover-scale-wrapper transition duration-300' onClick={() => handleReadBlog(blog)}>
+                            <div className="row shadow-sm border overflow-hidden">
+                                {/* left */}
+                                <div className="col-md-6 p-0">
                                     <img
-                                        src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png"
-                                        className="rounded-circle me-2"
-                                        alt="Admin"
-                                        width="40"
-                                        height="40"
+                                        src={`${BASE_URL}/uploads/${blog.blogImage}`}
+                                        alt="No image"
+                                        className="img-fluid w-100 h-100 object-fit-cover"
+                                        style={{ objectFit: 'cover', height: '100%' }}
                                     />
-                                    <div>
-                                        <small className="text-muted">{blog.userName}</small><br />
-                                        <small className="text-muted">{new Date(blog.updatedAt).toLocaleString()}</small>
+                                </div>
+    
+                                {/* right */}
+                                <div className="col-md-6 p-5 d-flex flex-column justify-content-between">
+    
+                                    <div className="d-flex align-items-center mb-4">
+                                        <img
+                                            src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png"
+                                            className="rounded-circle me-2"
+                                            alt="Admin"
+                                            width="40"
+                                            height="40"
+                                        />
+                                        <div>
+                                            <small className="text-muted">{blog.userName}</small><br />
+                                            <small className="text-muted">{new Date(blog.updatedAt).toLocaleString()}</small>
+                                        </div>
+                                    </div>
+    
+                                    <div className="flex-grow-1 d-flex flex-column justify-content-center ">
+                                        <h5 className="blog-text fw-bold">{blog.title}</h5>
+                                        <h6>{blog.subHead}</h6>
+                                        <p className="text-muted">
+                                            {blog.content.slice(0, 150)}...
+                                        </p>
+                                    </div>
+    
+                                    <div className="pt-3 border-top text-end">
+                                        <small className="text-muted">{getTimeAgo(blog.updatedAt)}</small>
                                     </div>
                                 </div>
-
-                                <div className="flex-grow-1 d-flex flex-column justify-content-center ">
-                                    <h5 className="blog-text fw-bold">{blog.title}</h5>
-                                    <h6>{blog.subHead}</h6>
-                                    <p className="text-muted">
-                                        {blog.content.slice(0, 150)}...
-                                    </p>
-                                </div>
-
-                                <div className="pt-3 border-top text-end">
-                                    <small className="text-muted">{getTimeAgo(blog.updatedAt)}</small>
-                                </div>
+    
                             </div>
-
                         </div>
                     </div>
                 ))

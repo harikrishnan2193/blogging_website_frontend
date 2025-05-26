@@ -48,6 +48,16 @@
   font-family: "Raleway", sans-serif;
 }
 
+.hover-scale-wrapper {
+  transition: transform 0.3s ease;
+}
+
+.hover-scale-wrapper:hover {
+  cursor: pointer;
+  transform: scale(1.01);
+}
+
+
 /* admin page */
 .custom-tag-button {
   background: none;
