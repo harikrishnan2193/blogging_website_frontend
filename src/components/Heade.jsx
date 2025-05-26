@@ -68,11 +68,7 @@ function Heade() {
 
                 {logedIn && (
                   <>
-                    <Link to="/admin">
-                      <Button variant="outline-dark">
-                        <i className="fa-solid fa-user"></i> Page
-                      </Button>
-                    </Link>
+                    <Nav.Link href="/admin"><i className="fa-solid fa-user"></i> Page</Nav.Link>
 
                     <Button variant="outline-dark" onClick={handleLogout}>
                       Logout

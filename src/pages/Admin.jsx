@@ -78,7 +78,6 @@ function Admin() {
         }
     }
 
-
     //function to get all users blogs
     const getAllUserBlogs = async () => {
         const userDetailsString = sessionStorage.getItem("userDetils");
@@ -179,6 +178,19 @@ function Admin() {
         }
     }
 
+    //close modal
+    const handleClose = () => {
+        setProduct({
+            title: '',
+            subHead: '',
+            content: '',
+            blogImage: '',
+            userName: ''
+        })
+        setImgPreview('')
+        setShowModal(false)
+    }
+
 
     useEffect(() => {
         getAllUserBlogs()
@@ -187,18 +199,17 @@ function Admin() {
     return (
         <>
             <div className="content-padding">
-                {/* header buttons */}
                 <div className="d-flex flex-wrap gap-3 py-5">
-                    <button className="custom-tag-button text-primary">
+                    <span className="text-primary fs-5 fw-semibold">
                         All Posts
-                    </button>
+                    </span>
                     <button onClick={() => setShowModal(true)} className="custom-tag-button">
                         Add New Blog
                     </button>
                 </div>
 
-                {/* card */}
 
+                {/* card */}
                 {allUserBlog.length > 0 ? (
                     allUserBlog.map((blog, index) => (
                         <div className="border p-5 mb-5 shadow-sm">
@@ -253,11 +264,11 @@ function Admin() {
                             <div className="modal-content">
                                 <div className="modal-header">
                                     <h5 className="modal-title">New Blog</h5>
-                                    <button type="button" className="btn-close" onClick={() => setShowModal(false)}></button>
+                                    <button type="button" className="btn-close" onClick={handleClose}></button>
                                 </div>
                                 <div className="modal-body row">
                                     <div className="col-12 mb-4">
-                                        <label htmlFor="upload" className="d-block bg-primary bg-opacity-10 border border-primary rounded p-5 text-center cursor-pointer">
+                                        <label htmlFor="upload" className="d-block bg-primary bg-opacity-10 border border-primary rounded p-3 text-center cursor-pointer">
                                             <input
                                                 id="upload"
                                                 type="file"
@@ -268,8 +279,8 @@ function Admin() {
                                                 src={imgPreview ? imgPreview : "https://cdn-icons-png.flaticon.com/512/1004/1004733.png"}
                                                 className="mb-2"
                                                 alt="Upload icon"
-                                                width="100"
-                                                height="100"
+                                                width="200"
+                                                height="150"
                                             />
                                             <p className="mb-0 text-primary">Click here to upload an image</p>
                                         </label>
@@ -297,7 +308,7 @@ function Admin() {
 
                                 <div className="modal-footer">
                                     <div className="modal-footer">
-                                        <button type="button" className="btn btn-secondary" onClick={() => setShowModal(false)}>Close</button>
+                                        <button type="button" className="btn btn-secondary" onClick={handleClose}>Close</button>
 
                                         {!editMode ? (
                                             <button onClick={handlePublish} type="button" className="btn btn-primary">Publish</button>

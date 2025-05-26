@@ -21,6 +21,22 @@ function Landing() {
         }
     }
 
+    //time difference
+    function getTimeAgo(dateString) {
+        const now = new Date()
+        const past = new Date(dateString)
+        const diffInMs = now - past
+
+        const diffInMinutes = Math.floor(diffInMs / (1000 * 60))
+        const diffInHours = Math.floor(diffInMinutes / 60)
+        const diffInDays = Math.floor(diffInHours / 24)
+
+        if (diffInMinutes < 1) return 'just now'
+        if (diffInMinutes < 60) return `${diffInMinutes} minute${diffInMinutes !== 1 ? 's' : ''} ago`
+        if (diffInHours < 24) return `${diffInHours} hour${diffInHours !== 1 ? 's' : ''} ago`
+        return `${diffInDays} day${diffInDays !== 1 ? 's' : ''} ago`
+    }
+
     useEffect(() => {
         getAllBlogs()
     }, [])
@@ -28,19 +44,21 @@ function Landing() {
     return (
         <>
             <div
-                className="landing-content d-flex align-items-top justify-content-center text-white"
+                className="landing-content d-flex align-items-top justify-content-center"
                 style={{
                     backgroundImage: `url('https://static.wixstatic.com/media/baac51_d623fe1790ed419a89d20aa05f6064b2.jpg/v1/fill/w_1901,h_625,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/baac51_d623fe1790ed419a89d20aa05f6064b2.jpg')`,
                     backgroundSize: 'cover',
                     backgroundPosition: 'center',
                     backgroundRepeat: 'no-repeat',
                     backgroundAttachment: 'fixed',
-                    minHeight: '70vh',
+                    height: '500px',
                     position: 'relative',
+                    objectFit: 'cover',
+                    objectPosition: '50% 50%',
                 }}
             >
                 <div className="container text-center">
-                    <h3 className="text-heading text-dark pt-5">CRAFTED WITH PURPOSE,<span className='fw-light'> INSPIRED</span> BY STYLE</h3>
+                    <h3 className="text-heading text-dark">CRAFTED WITH PURPOSE,<span className='fw-light'> INSPIRED</span> BY STYLE</h3>
                 </div>
             </div>
 
@@ -65,7 +83,7 @@ function Landing() {
                             {/* right */}
                             <div className="col-md-6 p-5 d-flex flex-column justify-content-between">
                                 <div className='pb-4'>
-                                    <div className="d-flex align-items-center mb-4">
+                                    <div className="d-flex align-items-center">
                                         <img
                                             src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png"
                                             className="rounded-circle me-2"
@@ -91,22 +109,17 @@ function Landing() {
 
                                 </div>
 
-                                <div className="d-flex justify-content-between align-items-center pt-3 border-top">
-                                    {/* <div>
-                                        <small className="text-muted me-3">0 views</small>
-                                        <small className="text-muted">0 comments</small>
-                                    </div>
+                                <div className="d-flex justify-content-end pt-3 border-top">
                                     <div>
-                                        <small className="text-muted me-1">42</small>
-                                        <i className="bi bi-heart text-danger"></i>
-                                    </div> */}
+                                        <small className="text-muted">{getTimeAgo(blog.updatedAt)}</small>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 ))
             ) : (
-                <p className='fw-bold content-padding py-3'>No blogs currently found</p>
+                <p className='fw-bold content-padding py-3'>Blogs are loading...</p>
             )
 
             }

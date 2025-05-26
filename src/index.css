@@ -42,6 +42,7 @@
 .text-heading,
 .blog-text {
   font-family: "Raleway", sans-serif;
+  padding-top: 5rem;
 }
 
 .card-content:hover {
@@ -69,9 +70,26 @@
 .custom-tag-button:hover {
   background-size: 100% 2px;
 }
-.card-heading{
+
+.card-heading {
   font-family: "Roboto Mono", monospace;
 }
-.blog-content-text{
+
+.blog-content-text {
   font-family: "Tuffy", sans-serif;
+}
+
+/* about page */
+.section-title {
+  font-family: "Roboto Mono", monospace;
+  font-weight: 500;
+  font-size: 2.5rem;
+  letter-spacing: 1px;
+  margin-top: 4rem;
+}
+
+.about-image {
+  max-width: 100%;
+  height: auto;
+  object-fit: cover;
 }
