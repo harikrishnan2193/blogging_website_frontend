@@ -134,7 +134,7 @@ function Auth() {
                         </div>
                         :
                         <div className={`text-center ${styles.register}`}>
-                            <span>Do not have an account? <a href="/login">Login</a></span>
+                            <span>Already have an account? <a href="/login">Login</a></span>
                         </div>
                     }
                 </div>
