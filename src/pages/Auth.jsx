@@ -38,7 +38,7 @@ function Auth() {
 
             if (result.status === 200) {
                 Swal.fire(`${result.data.name} is successfully registered`)
-                setUserData({ name: "", email: "", password: "" })
+                setUserData({ name: "", email: "", password: "", confirmPassword: "" })
                 navigate('/login')
             }
             else {
