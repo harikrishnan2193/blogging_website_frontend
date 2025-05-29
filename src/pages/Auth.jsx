@@ -14,19 +14,23 @@ function Auth() {
     const isLoginPath = location.pathname === '/login';
     const isRegisterPath = location.pathname === '/register';
     const [userData, setUserData] = useState({
-        name: '',
-        email: '',
-        password: ''
+        name: "",
+        email: "",
+        password: "",
+        confirmPassword: ""
     })
-    console.log(userData);
+    // console.log(userData);
 
 
     //function to register
     const handleRegister = async (e) => {
         e.preventDefault();
-        const { name, email, password } = userData
-        if (!name || !email || !password) {
+        const { name, email, password, confirmPassword } = userData
+        if (!name || !email || !password || !confirmPassword) {
             Swal.fire("Please fill all the form completily")
+        }
+        else if (password !== confirmPassword) {
+            Swal.fire("Passwords do not match")
         }
         else {
             const result = await registerAPI(userData)
@@ -101,6 +105,14 @@ function Auth() {
                         <label htmlFor="pass" className={styles.label}>Password</label>
                         <i className={`fa-solid fa-lock ${styles.icone}`}></i>
                     </div>
+
+                    {isRegisterPath && (
+                        <div className={styles.input_box}>
+                            <input onChange={(e) => setUserData({ ...userData, confirmPassword: e.target.value })} value={userData.confirmPassword} type="password" id="confirmPass" className={styles.input_field} required />
+                            <label htmlFor="confirmPass" className={styles.label}>Confirm Password</label>
+                            <i className={`fa-solid fa-key ${styles.icone}`}></i>
+                        </div>
+                    )}
 
                     {/* <div className={`text-end ${styles.forgot}`}>
                         <a href="#">Forgot Password?</a>
